@@ -18,10 +18,113 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  height: 100%;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.divbody {
+  width: 100%;
+  height: 100%;
+}
+
+.ASII-Title {
+  margin-top: 30px;
+}
+
+.ASII-Logo-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 50px;
+  margin-bottom: 25px;
+}
+
+.Punctaj {
+  font: bold;
+  font-size: 30px;
+  margin-left: 25%;
+  margin-bottom: 20px;
+  letter-spacing: -1.5px;
+}
+
+.ASII-Logo {
+  width: 150px;
+  height: 150px;
+  background: url(Imagini/ASII_A_-_color-removebg-preview.png) no-repeat;
+  background-size: 150px;
+  align-self: center;
+  margin-left: 25%;
+  border: 3px solid black;
+  border-radius: 50px;
+  box-shadow: 3px 3px 1px black;
+}
+
+.ASII-Logo:hover {
+  cursor: pointer;
+  box-shadow: inset 3px 3px 1px black;
+}
+
+.Shop-container {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 23% 23% 23%;
+  grid-template-rows: 40% 40%;
+  grid-gap: 20px;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.boxshop {
+  display: flex;
+  flex-wrap: no-wrap;
+  text-align: center;
+  align-items: center;
+  padding: 10px;
+  background-image: linear-gradient(to right, red, black);
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px black;
+}
+
+#PROimg {
+  background: url(Imagini/BibliotecaraPRO.png) no-repeat;
+  width: 20%;
+  height: 100%;
+  background-size: 100%;
+  border-radius: 100px;
+}
+
+.parShop {
+  width: 50%;
+}
+
+.buybtn {
+  background-color: green;
+  border-radius: 10px;
+  border: 1px solid black;
+  width: 20%;
+  height: 70%;
+}
+
+nav {
+  width: 100%;
+  height: 100px;
+  margin-top: 100px;
+  display: flex;
+  align-items: center;
+  text-align:end;
 }

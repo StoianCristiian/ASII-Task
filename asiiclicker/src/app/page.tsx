@@ -29,12 +29,11 @@ export default function Main() {
   const handleClick = () => {
     setpuncte(puncte + multiplier);
   };
-  {/*VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV */}
+
   const switchReset = () => {
     setTestimoniale(false);
     setAbout(false);
   }
-  {/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */}
 
   const switchAbout = () => {
     setAbout(!about);
@@ -43,7 +42,6 @@ export default function Main() {
   const switchTestimoniale = () => {
     setTestimoniale(!testimoniale);
   };
-
 
   {
     /*ADAUGARE PERIODICA */
@@ -157,57 +155,75 @@ export default function Main() {
   if (testimoniale == false) {
     if (about == false) {
       return (
-        <div className="flex flex-col text-center mt-12">
-          <h1>ASII Clicker</h1>
-          <p>Numar Puncte: {puncte}</p>
-          <div className="flex-col bg-cyan-400 w-1/3 ml-auto justify-end mt-60">
-            <button onClick={handleClick} style={buttonStyle}>
-              Click ASII!
-            </button>
+        <div className="flex flex-col items-center divbody">
+          <h1 className="ASII-Title bg-gradient-to-b from-gray-900 to-red-500 bg-clip-text text-center font-sora text-[55px] text-transparent xl:text-[64px]">ASII Clicker</h1>
+          <div className="ASII-Logo-container">
+            <p className="Punctaj">Puncte: {puncte}</p>
+            <button onClick={handleClick} className="ASII-Logo"></button>
           </div>
 
-          <div className="flex flex-col w-1/3 bg-red-600 text-center mt-auto">
-            <button onClick={buyZanaPR} style={buttonStyle}>
-              Buy Zana PRM ({pret_zana})
-            </button>
+          <div className="Shop-container">
+            <div className="PRM-container boxshop">
+              <p className="parShop">Zana PRM </p>
+              <button onClick={buyZanaPR} className="buybtn">
+                Buy ({pret_zana})
+              </button>
+            </div>
 
-            <button onClick={buySpiridusRE} style={buttonStyle}>
-              Buy Spiridus RE ({pret_spiridus})
+            <div className="RE-container boxshop">
+              <p className="parShop">Spiridus RE</p>
+            <button onClick={buySpiridusRE} className="buybtn">
+              Buy ({pret_spiridus})
             </button>
+            </div>
 
-            <button onClick={buyBibliotecara} style={buttonStyle}>
-              Buy Bibliotecara PRO ({pret_bibliotecara})
+            <div className="PRO-container boxshop">
+              <div id="PROimg"></div>
+              <p className="parShop">Bibliotecara PRO</p>
+             <button onClick={buyBibliotecara} className="buybtn">
+              Buy ({pret_bibliotecara})
             </button>
+            </div>
 
-            <button onClick={buyElfRI} style={buttonStyle}>
-              Buy Elf RI ({pret_elf})
+            <div className="RI-container boxshop">
+              <p className="parShop">Elf RI</p>
+            <button onClick={buyElfRI} className="buybtn">
+              Buy ({pret_elf})
             </button>
+            </div>
 
-            <button onClick={buyVrajitorIT} style={buttonStyle}>
-              Buy Vrajitor IT ({pret_vrajitor})
+            <div className="IT-container boxshop">
+              <p className="parShop">Vrajitor IT</p>
+            <button onClick={buyVrajitorIT} className="buybtn">
+              Buy ({pret_vrajitor})
             </button>
+            </div>
 
-            <button onClick={buyMultiplier} style={buttonStyle}>
-              Buy Multiplier ({pret_multiplier})
+            <div className="Multiplier-container boxshop">
+              <p className="parShop">Multiplier</p>
+            <button onClick={buyMultiplier} className="buybtn">
+              Buy ({pret_multiplier})
             </button>
+            </div>
           </div>
-          <div>
-            <button onClick={switchAbout} style={buttonStyle}>
+
+          <nav>
+            <button onClick={switchAbout}>
               About
             </button>
-            <button onClick={switchTestimoniale} style={buttonStyle}>
+            <button onClick={switchTestimoniale}>
               Testimoniale
             </button>
-          </div>
+          </nav>
         </div>
       );
     } else {
       return (
-        <div className="flex flex-col flex-wrap mt-10">
-          <div className="flex flex-col justify-center font-bold text-2xl text-center">
+        <div >
+          <div >
             <h1>About</h1>
           </div>
-          <div className="flex flex-row flex-wrap">
+          <div >
             <p>
               Asociația Studenților Informaticieni Ieșeni reprezintă o
               organizație non-guvernamentală, apolitică și non-profit ce are ca
@@ -226,17 +242,13 @@ export default function Main() {
               şi a comunităţii IT.
             </p>
           </div>
-          <div className="flex w-full flex-col bg-red-600 rounded-lg justify-center font-bold">
-
-            {/** VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV */}
-            <button onClick={switchReset} className="flex flex-col">
+          <div >
+          <button onClick={switchReset}>
               Inapoi la Joc
             </button>
-            <button onClick={() => {switchReset(); switchTestimoniale()}} className="flex flex-col">
+            <button onClick={() => {switchReset(); switchTestimoniale()}}>
               Testimoniale
             </button>
-            {/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */}
-
           </div>
         </div>
       );
@@ -244,30 +256,26 @@ export default function Main() {
   }
   else{
     return(
-    <div className="flex flex-col flex-wrap mt-10">
-          <div className="flex flex-col justify-center font-bold text-2xl text-center">
+    <div >
+          <div >
             <h1>Testimoniale</h1>
           </div>
-          <div className="flex flex-row flex-wrap">
+          <div >
             <label htmlFor="userInput">Lasa un comentariu:</label>
             <input
       type="text"
       id="userInput"
-      className="flex flex-col p-2 w-1/2 rounded-lg"
+      
       placeholder="Lasa un comentariu"
     />
           </div>
-          <div className="flex w-full flex-col bg-red-600 rounded-lg justify-center font-bold">
-
-            {/** VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV */}
-            <button onClick={switchReset} className="flex flex-col">
+          <div >
+          <button onClick={switchReset}>
               Inapoi la Joc
             </button>
-            <button onClick={() => {switchReset(); switchAbout()}} className="flex flex-col">
+            <button onClick={() => {switchReset(); switchAbout()}}>
               About
             </button>
-            {/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */}
-
           </div>
         </div>
     )
@@ -277,10 +285,4 @@ export default function Main() {
 {
   /*STYLES */
 }
-const buttonStyle = {
-  padding: "10px 20px",
-  fontSize: "18px",
-  margin: "10px",
-  border: "red",
-  cursor: "pointer",
-};
+
