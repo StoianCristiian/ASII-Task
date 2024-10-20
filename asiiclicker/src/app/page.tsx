@@ -29,6 +29,12 @@ export default function Main() {
   const handleClick = () => {
     setpuncte(puncte + multiplier);
   };
+  {/*VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV */}
+  const switchReset = () => {
+    setTestimoniale(false);
+    setAbout(false);
+  }
+  {/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */}
 
   const switchAbout = () => {
     setAbout(!about);
@@ -37,6 +43,7 @@ export default function Main() {
   const switchTestimoniale = () => {
     setTestimoniale(!testimoniale);
   };
+
 
   {
     /*ADAUGARE PERIODICA */
@@ -220,9 +227,16 @@ export default function Main() {
             </p>
           </div>
           <div className="flex w-full flex-col bg-red-600 rounded-lg justify-center font-bold">
-            <button onClick={switchAbout} className="flex flex-col">
-              Close
+
+            {/** VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV */}
+            <button onClick={switchReset} className="flex flex-col">
+              Inapoi la Joc
             </button>
+            <button onClick={() => {switchReset(); switchTestimoniale()}} className="flex flex-col">
+              Testimoniale
+            </button>
+            {/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */}
+
           </div>
         </div>
       );
@@ -244,9 +258,16 @@ export default function Main() {
     />
           </div>
           <div className="flex w-full flex-col bg-red-600 rounded-lg justify-center font-bold">
-            <button onClick={switchTestimoniale} className="flex flex-col">
-              Close
+
+            {/** VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV */}
+            <button onClick={switchReset} className="flex flex-col">
+              Inapoi la Joc
             </button>
+            <button onClick={() => {switchReset(); switchAbout()}} className="flex flex-col">
+              About
+            </button>
+            {/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */}
+
           </div>
         </div>
     )
