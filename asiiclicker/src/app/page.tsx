@@ -213,10 +213,10 @@ export default function Main() {
           </div>
 
           <nav>
-            <button onClick={switchAbout}>
+            <button onClick={switchAbout} className="bg-red-500 text-white font-bold py-2 px-4 rounded btn">
               About
             </button>
-            <button onClick={switchTestimoniale}>
+            <button onClick={switchTestimoniale} className="bg-red-500 text-white font-bold py-2 px-4 rounded btn">
               Testimoniale
             </button>
           </nav>
@@ -224,12 +224,12 @@ export default function Main() {
       );
     } else {
       return (
-        <div >
-          <div>
-            <h1>About</h1>
+        <div className="About-div">
+          <div className="About-div">
+            <h1 className="About-Title">About</h1>
           </div>
-          <div >
-            <p>
+          <div className="About-div">
+            <p className="About-p">
               Asociația Studenților Informaticieni Ieșeni reprezintă o
               organizație non-guvernamentală, apolitică și non-profit ce are ca
               scop promovarea voluntariatului și oferirea de oportunități
@@ -248,10 +248,10 @@ export default function Main() {
             </p>
           </div>
           <div >
-          <button onClick={switchReset}>
+          <button onClick={switchReset} className="bg-red-500 text-white font-bold py-2 px-4 rounded About-btn">
               Inapoi la Joc
             </button>
-            <button onClick={() => {switchReset(); switchTestimoniale()}}>
+            <button onClick={() => {switchReset(); switchTestimoniale()}} className="bg-red-500 text-white font-bold py-2 px-4 rounded About-btn">
               Testimoniale
             </button>
           </div>
@@ -261,24 +261,24 @@ export default function Main() {
   }
   else{
     return(
-    <div >
-          <div >
-            <h1>Testimoniale</h1>
+    <div className="Testi-div">
+          <div className="Testi-div">
+            <h1 className="Testi-title">Testimoniale</h1>
           </div>
-          <div >
-            <label htmlFor="userInput">Lasa un comentariu:</label>
-            <input
+          <div className="Testi-div">
+            <label htmlFor="userInput" className="Testi-label">Lasa un comentariu:</label>
+            <input className="Testi-input"
       type="text"
       id="userInput"
       
       placeholder="Lasa un comentariu"
     />
           </div>
-          <div >
-          <button onClick={switchReset}>
+          <div className="Testi-div">
+          <button onClick={switchReset} className="Testi-btn bg-red-500 text-white font-bold py-2 px-4 rounded">
               Inapoi la Joc
             </button>
-            <button onClick={() => {switchReset(); switchAbout()}}>
+            <button onClick={() => {switchReset(); switchAbout()}} className="Testi-btn bg-red-500 text-white font-bold py-2 px-4 rounded">
               About
             </button>
           </div>
