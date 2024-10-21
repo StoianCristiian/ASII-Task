@@ -164,6 +164,7 @@ export default function Main() {
 
           <div className="Shop-container">
             <div className="PRM-container boxshop">
+              <div id="PRMimg" className="image"></div>
               <p className="parShop">Zana PRM </p>
               <button onClick={buyZanaPR} className="buybtn">
                 Buy ({pret_zana})
@@ -171,6 +172,7 @@ export default function Main() {
             </div>
 
             <div className="RE-container boxshop">
+            <div id="REimg" className="image"></div>
               <p className="parShop">Spiridus RE</p>
             <button onClick={buySpiridusRE} className="buybtn">
               Buy ({pret_spiridus})
@@ -178,7 +180,7 @@ export default function Main() {
             </div>
 
             <div className="PRO-container boxshop">
-              <div id="PROimg"></div>
+              <div id="PROimg" className="image"></div>
               <p className="parShop">Bibliotecara PRO</p>
              <button onClick={buyBibliotecara} className="buybtn">
               Buy ({pret_bibliotecara})
@@ -186,6 +188,7 @@ export default function Main() {
             </div>
 
             <div className="RI-container boxshop">
+              <div id="RIimg" className="image"></div>
               <p className="parShop">Elf RI</p>
             <button onClick={buyElfRI} className="buybtn">
               Buy ({pret_elf})
@@ -193,6 +196,7 @@ export default function Main() {
             </div>
 
             <div className="IT-container boxshop">
+              <div id="ITimg" className="image"></div>
               <p className="parShop">Vrajitor IT</p>
             <button onClick={buyVrajitorIT} className="buybtn">
               Buy ({pret_vrajitor})
@@ -200,6 +204,7 @@ export default function Main() {
             </div>
 
             <div className="Multiplier-container boxshop">
+              <div id="multimg" className="image"></div>
               <p className="parShop">Multiplier</p>
             <button onClick={buyMultiplier} className="buybtn">
               Buy ({pret_multiplier})
@@ -220,7 +225,7 @@ export default function Main() {
     } else {
       return (
         <div >
-          <div >
+          <div>
             <h1>About</h1>
           </div>
           <div >
@@ -280,9 +285,5 @@ export default function Main() {
         </div>
     )
   }
-}
-
-{
-  /*STYLES */
 }
 
