@@ -1,33 +1,21 @@
 "use client";
 import React from "react";
 import { useState, useEffect } from "react";
+import {Game, initialGame, incrementPoint, updateAllPrices, updatePrice, updateCurrentPoints, getCurrentPrice, resetGame, buyMultiplier} from "./game";
+import {saveGameState, retrieveGameState} from './service';
 
 export default function Main() {
-  const [puncte, setpuncte] = useState(0);
-
-  const [vrajitorIT, setVrajitorIT] = useState(0);
-  const [pret_vrajitor, setPret_vrajitor] = useState(50);
-
-  const [multiplier, setMultiplier] = useState(1);
-  const [pret_multiplier, setPret_multiplier] = useState(60);
-
-  const [zanaPR, setZanaPR] = useState(0);
-  const [pret_zana, setPret_zana] = useState(10);
-
-  const [spiridusRE, setSpiridusRE] = useState(0);
-  const [pret_spiridus, setPret_spiridus] = useState(20);
-
-  const [bibliotecara, setBibliotecara] = useState(0);
-  const [pret_bibliotecara, setPret_bibliotecara] = useState(30);
-
-  const [elfRI, setElfRI] = useState(0);
-  const [pret_elf, setPret_elf] = useState(40);
-
   const [about, setAbout] = useState(false);
   const [testimoniale, setTestimoniale] = useState(false);
 
+  const [gameState, setGameState] = useState<Game| null>(null);
+  const [needToUpdate, setNeedToUpdate] = useState(false);
   const handleClick = () => {
-    setpuncte(puncte + multiplier);
+    if (gameState){
+      incrementPoint(gameState);
+      setNeedToUpdate(!needToUpdate);
+      console.log(gameState.puncte);
+    }
   };
 
   const switchReset = () => {
@@ -43,122 +31,57 @@ export default function Main() {
     setTestimoniale(!testimoniale);
   };
 
-  {
     /*ADAUGARE PERIODICA */
-  }
+
   let interval: number;
-  useEffect(() => {
-    if (vrajitorIT) {
-      interval = window.setInterval(() => {
-        setpuncte((prevPuncte) => prevPuncte + vrajitorIT * 4);
-      }, 1000);
-    }
-    return () => clearInterval(interval);
-  }, [vrajitorIT]);
+
+    const fetchGameState = async () => {
+      const currentGameState = await retrieveGameState(); // Fetch game state
+      console.log(currentGameState);
+      if( currentGameState !== null){
+        setGameState({...currentGameState}); // Set the game state in state
+        return;
+      }
+      setGameState({...initialGame});
+  };
 
   useEffect(() => {
-    if (zanaPR) {
-      interval = window.setInterval(() => {
-        setpuncte((prevPuncte) => prevPuncte + zanaPR);
-      }, 1000);
-    }
-    return () => clearInterval(interval);
-  }, [zanaPR]);
+    fetchGameState().catch(console.error); // Handle any errors during fetch
+  }, []); 
 
   useEffect(() => {
-    if (spiridusRE) {
-      interval = window.setInterval(() => {
-        setpuncte((prevPuncte) => prevPuncte + spiridusRE * 2);
-      }, 1000);
-    }
-    return () => clearInterval(interval);
-  }, [spiridusRE]);
+    interval = window.setInterval(() => {
+      if (gameState){
+        const game = updateCurrentPoints(gameState);
+        setGameState({...game});
+      }
+    }, 1000);
 
-  useEffect(() => {
-    if (bibliotecara) {
-      interval = window.setInterval(() => {
-        setpuncte((prevPuncte) => prevPuncte + bibliotecara * 3);
-      }, 1000);
-    }
     return () => clearInterval(interval);
-  }, [bibliotecara]);
+  }, [gameState]);
 
-  useEffect(() => {
-    if (elfRI) {
-      interval = window.setInterval(() => {
-        setpuncte((prevPuncte) => prevPuncte + elfRI * 4);
-      }, 1000);
-    }
-    return () => clearInterval(interval);
-  }, [elfRI]);
-
-  {
     /*BUY SECTION */
-  }
-  const buyVrajitorIT = () => {
-    if (puncte >= pret_vrajitor) {
-      setpuncte(puncte - pret_vrajitor);
-      setPret_vrajitor(Math.ceil(pret_vrajitor + pret_vrajitor / 10));
-      setVrajitorIT(vrajitorIT + 1);
-    } else {
-      alert("Nu ai destule puncte!");
+
+  const buyItem = (nr: number) => {
+    let game = gameState;
+    try{
+      if (game){
+        game = buyMultiplier(game, nr);
+        setGameState({... game});
+      }
+    }catch(e){
+      alert("Nu ai destule puncte");
     }
-  };
 
-  const buyZanaPR = () => {
-    if (puncte >= pret_zana) {
-      setpuncte(puncte - pret_zana);
-      setPret_zana(Math.ceil(pret_zana + pret_zana / 10));
-      setZanaPR(zanaPR + 1);
-    } else alert("Nu ai destule puncte!");
-  };
-
-  const buySpiridusRE = () => {
-    if (puncte >= pret_spiridus) {
-      setpuncte(puncte - pret_spiridus);
-      setPret_spiridus(Math.ceil(pret_spiridus + pret_spiridus / 10));
-      setSpiridusRE(spiridusRE + 1);
-    } else alert("Nu ai destule puncte!");
-  };
-
-  const buyBibliotecara = () => {
-    if (puncte >= pret_bibliotecara) {
-      setpuncte(puncte - pret_bibliotecara);
-      setPret_bibliotecara(
-        Math.ceil(pret_bibliotecara + pret_bibliotecara / 10)
-      );
-      setBibliotecara(bibliotecara + 1);
-    } else alert("Nu ai destule puncte!");
-  };
-
-  const buyElfRI = () => {
-    if (puncte >= pret_elf) {
-      setpuncte(puncte - pret_elf);
-      setPret_elf(Math.ceil(pret_elf + pret_elf / 10));
-      setElfRI(elfRI + 1);
-    } else alert("Nu ai destule puncte!");
-  };
-
-  const buyMultiplier = () => {
-    if (puncte >= pret_multiplier) {
-      setpuncte(puncte - pret_multiplier);
-      setMultiplier(multiplier + 1);
-      setPret_multiplier(pret_multiplier * 2);
-    } else {
-      alert("Nu ai destule puncte!");
-    }
-  };
-
-  {
-    /*FRONT */
   }
+  
   if (testimoniale == false) {
     if (about == false) {
       return (
         <div className="flex flex-col items-center divbody">
           <h1 className="ASII-Title bg-gradient-to-b from-gray-900 to-red-500 bg-clip-text text-center font-sora text-[55px] text-transparent xl:text-[64px]">ASII Clicker</h1>
           <div className="ASII-Logo-container">
-            <p className="Punctaj">Puncte: {puncte}</p>
+            <p className="Punctaj">Puncte: {gameState ? gameState.puncte : 0}</p>
             <button onClick={handleClick} className="ASII-Logo"></button>
           </div>
 
@@ -166,48 +89,48 @@ export default function Main() {
             <div className="PRM-container boxshop">
               <div id="PRMimg" className="image"></div>
               <p className="parShop">Zana PRM </p>
-              <button onClick={buyZanaPR} className="buybtn">
-                Buy ({pret_zana})
+              <button onClick={() => buyItem(0)} className="buybtn">
+                Buy ({gameState ? gameState.preturi[0] : 0})
               </button>
             </div>
 
             <div className="RE-container boxshop">
             <div id="REimg" className="image"></div>
               <p className="parShop">Spiridus RE</p>
-            <button onClick={buySpiridusRE} className="buybtn">
-              Buy ({pret_spiridus})
+            <button onClick={() => buyItem(1)} className="buybtn">
+              Buy ({gameState ? gameState.preturi[1] : 0})
             </button>
             </div>
 
             <div className="PRO-container boxshop">
               <div id="PROimg" className="image"></div>
               <p className="parShop">Bibliotecara PRO</p>
-             <button onClick={buyBibliotecara} className="buybtn">
-              Buy ({pret_bibliotecara})
+             <button onClick={() => buyItem(2)} className="buybtn">
+              Buy ({gameState ? gameState.preturi[2] : 0})
             </button>
             </div>
 
             <div className="RI-container boxshop">
               <div id="RIimg" className="image"></div>
               <p className="parShop">Elf RI</p>
-            <button onClick={buyElfRI} className="buybtn">
-              Buy ({pret_elf})
+            <button onClick={() => buyItem(3)} className="buybtn">
+              Buy ({gameState ? gameState.preturi[3] : 0})
             </button>
             </div>
 
             <div className="IT-container boxshop">
               <div id="ITimg" className="image"></div>
               <p className="parShop">Vrajitor IT</p>
-            <button onClick={buyVrajitorIT} className="buybtn">
-              Buy ({pret_vrajitor})
+            <button onClick={() => buyItem(4)} className="buybtn">
+              Buy ({gameState ? gameState.preturi[4] : 0})
             </button>
             </div>
 
             <div className="Multiplier-container boxshop">
               <div id="multimg" className="image"></div>
               <p className="parShop">Multiplier</p>
-            <button onClick={buyMultiplier} className="buybtn">
-              Buy ({pret_multiplier})
+            <button onClick={() => buyItem(5)} className="buybtn">
+              Buy ({gameState ? gameState.preturi[5] : 0})
             </button>
             </div>
           </div>
